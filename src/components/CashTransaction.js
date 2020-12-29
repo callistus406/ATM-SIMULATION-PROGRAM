@@ -72,10 +72,10 @@ function CashTransaction() {
     }
   };
   function displayDeposit() {
-    const actionBtnhandler = () => {};
+    const actionBtnHandler = () => {};
     return (
       <div style={{ height: "100vh" }}>
-        <CustomNavigation action4={actionBtnhandler} />
+        <CustomNavigation action4={actionBtnHandler} />
         <div className="layoutContainer">
           <div className="btnLayout" onClick={handleActionBtn}>
             {objectCol1.map((btn, index) => (

@@ -13,29 +13,53 @@ const useStyles = makeStyles((theme) => ({
 
 function LoadingScreen() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleClose = () => {
     setOpen(false);
   };
   const handleToggle = () => {
     setOpen(!open);
+    // alert("errtty");
   };
-  return (
-    <div>
+  function displayLoadingScreen() {
+    return (
       <div>
-        <Button variant="outlined" color="primary" onClick={handleToggle}>
+        <div>
+          {/* <Button variant="outlined" color="primary" onLoad={handleToggle}>
           Show backdrop
-        </Button>
-        <Backdrop
-          className={classes.backdrop}
-          open={open}
-          onClick={handleClose}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        </Button> */}
+          <Backdrop
+            className={classes.backdrop}
+            open={open}
+            onClick={handleClose}
+            onLoad={handleToggle}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                // justifyContent: "space-between",
+                justifyContent: "space-around",
+                height: "80vh",
+              }}
+            >
+              <div
+                style={{
+                  alignSelf: "center",
+                }}
+              >
+                <CircularProgress color="inherit" />
+              </div>
+              <div>
+                <h1>PLEASE WAIT WHILE YOUR TRANSACTION IS PROCESSING</h1>
+              </div>
+            </div>
+          </Backdrop>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return displayLoadingScreen();
 }
 
 export default LoadingScreen;

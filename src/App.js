@@ -22,7 +22,7 @@ export function App() {
     <div>
       {/* <Creat eButton text="transfer" customClass="transferBtn" /> */}
       {/* <CreateButton /> */}
-      {/* <Transaction /> */}
+      <Transaction />
       {/* <ChangePassword /> */}
       {/* <CashTransaction /> */}
       {/* <Deposite /> */}
@@ -35,7 +35,7 @@ export function App() {
       {/* <BankDetails /> */}
       {/* <ConfirmationDialog /> */}
       {/* <LoadingScreen /> */}
-      <PasswordConfirmation />
+      {/* <PasswordConfirmation /> */}
       {/* <Navigation /> */}
     </div>
   );

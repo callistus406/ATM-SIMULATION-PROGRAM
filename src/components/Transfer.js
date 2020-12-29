@@ -1,6 +1,8 @@
-import React from "react";
+import { React, useState } from "react";
 import { CreateButton } from "./CreateButton";
 import "./components_css.css";
+import TransferAccess from "./TransferAccess";
+import BankDetails from "./transferComponents/BankDetails";
 
 const objectCol1 = [
   {
@@ -53,23 +55,51 @@ const objectCol2 = [
   },
 ];
 function Transfer() {
-  return (
-    <div>
-      {" "}
+  const initialState = 0;
+
+  let [state, setState] = useState(initialState);
+
+  const handleActionBtn = (e) => {
+    const banks = [
+      "FIRST BANK",
+      "OCEANIC BANK",
+      "FCMB",
+      "SKYE BANK",
+      "UBA",
+      "STERLING BANK",
+      "EXIT",
+    ];
+    if (banks.includes(e.target.textContent)) {
+      setState((state = 1));
+    } else {
+      setState((state = 0));
+    }
+  };
+  function displayCashTransaction() {
+    return (
       <div className="layoutContainer">
-        <div className="btnLayout">
+        <div className="btnLayout" onClick={handleActionBtn}>
           {objectCol1.map((btn, index) => (
             <CreateButton text={btn.text} />
           ))}
         </div>
-        <div className="btnLayout">
+        <div className="btnLayout" onClick={handleActionBtn}>
           {objectCol2.map((btn, index) => (
             <CreateButton text={btn.text} />
           ))}
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  function renderCashTransaction() {
+    if (state === 0) {
+      return displayCashTransaction();
+    } else if (state === 1) {
+      return <BankDetails />;
+    }
+  }
+  return renderCashTransaction();
 }
 
 export default Transfer;
