@@ -1,6 +1,7 @@
 import React from "react";
 import { CreateButton } from "./CreateButton";
 import "./components_css.css";
+import CustomNavigation from "./CustomNavigation";
 const objectCol1 = [
   {
     id: "1",
@@ -42,17 +43,20 @@ const objectCol2 = [
 
 function Deposite() {
   return (
-    <div className="layoutContainer">
-      {" "}
-      <div className="btnLayout">
-        {objectCol1.map((btn, index) => (
-          <CreateButton text={btn.text} key={btn.id} />
-        ))}
-      </div>
-      <div className="btnLayout">
-        {objectCol2.map((btn, index) => (
-          <CreateButton text={btn.text} key={btn.id} />
-        ))}
+    <div>
+      <CustomNavigation />
+      <div className="layoutContainer">
+        {" "}
+        <div className="btnLayout">
+          {objectCol1.map((btn, index) => (
+            <CreateButton text={btn.text} key={btn.id} />
+          ))}
+        </div>
+        <div className="btnLayout">
+          {objectCol2.map((btn, index) => (
+            <CreateButton text={btn.text} key={btn.id} />
+          ))}
+        </div>
       </div>
     </div>
   );

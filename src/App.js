@@ -16,13 +16,16 @@ import BankDetails from "./components/transferComponents/BankDetails";
 import ConfirmationDialog from "./components/Interrupts/ConfirmationDialog";
 import LoadingScreen from "./components/Interrupts/LoadingScreen";
 import PasswordConfirmation from "./components/Interrupts/PasswordConfirmation";
+import ConfirmationMsg from "./ConfirmationMsg";
+import LandingScreen from "./components/LandingScreen";
 
 export function App() {
   return (
     <div>
       {/* <Creat eButton text="transfer" customClass="transferBtn" /> */}
       {/* <CreateButton /> */}
-      <Transaction />
+      {/* <Transaction /> */}
+      {/* <ConfirmationMsg /> */}
       {/* <ChangePassword /> */}
       {/* <CashTransaction /> */}
       {/* <Deposite /> */}
@@ -37,6 +40,7 @@ export function App() {
       {/* <LoadingScreen /> */}
       {/* <PasswordConfirmation /> */}
       {/* <Navigation /> */}
+      <LandingScreen />
     </div>
   );
 }

@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import "./components_css.css";
 import { CreateButton } from "./CreateButton";
 import CashTransaction from "./CashTransaction";
+import { CloudUploadTwoTone } from "@material-ui/icons";
+import CustomNavigation from "./CustomNavigation";
 
 const objectCol1 = [
   {
@@ -35,7 +37,7 @@ function AccountType() {
   function displayButton() {
     return (
       <div>
-        {" "}
+        <CustomNavigation /> <div style={{ marginBottom: "10vh" }}></div>
         <div className="btnLayoutSingle" onClick={handleActionBtn}>
           {objectCol1.map((btn, index) => (
             <CreateButton text={btn.text} />

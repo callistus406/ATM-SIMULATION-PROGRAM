@@ -14,8 +14,11 @@ import TextField from "@material-ui/core/TextField";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Divider from "@material-ui/core/Divider";
+// Button
 import "./ChangePassword.css";
 import NumberPad from "./NumberPad";
+import CustomNavigation from "./CustomNavigation";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +51,7 @@ function ChangePassword() {
         marginTop: theme.spacing(3),
       },
       textField: {
-        width: "80%",
+        width: "97%",
       },
     }));
     const classes = useStyles();
@@ -74,48 +77,62 @@ function ChangePassword() {
 
     return (
       <div>
-        {" "}
-        <FormControl
-          className={clsx(classes.margin, classes.textField)}
-          variant="outlined"
-        >
-          <InputLabel htmlFor="outlined-adornment-password">
-            {props.label}
-          </InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showPassword ? "text" : "password"}
-            value={values.password}
-            onChange={handleChange("password")}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={125}
-          />
-        </FormControl>
+        <div>
+          {" "}
+          <FormControl
+            className={clsx(classes.margin, classes.textField)}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined-adornment-password">
+              {props.label}
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={values.showPassword ? "text" : "password"}
+              value={values.password}
+              onChange={handleChange("password")}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={125}
+            />
+          </FormControl>
+        </div>
       </div>
     );
   }
   return (
-    <div className="parentInputContainer">
-      <div className="passwordContainer">
-        <PasswordInput label="Current Password" />
-        <PasswordInput label="New Password" />
-        <PasswordInput label="Retype Password" />
-      </div>
-      <Divider orientation="vertical" flexItem />
+    <div>
+      <CustomNavigation />
 
-      <div className="numberPadContainer">
-        <NumberPad />
+      <div className="parentInputContainer">
+        <div className="passwordContainer">
+          <PasswordInput label="Current Password" />
+          <PasswordInput label="New Password" />
+          <PasswordInput label="Retype Password" />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginLeft: "auto", marginRight: "auto" }}
+            // onClick={handleActionBtn}
+          >
+            Login
+          </Button>
+        </div>
+        <Divider orientation="vertical" flexItem />
+
+        <div className="numberPadContainer">
+          <NumberPad />
+        </div>
       </div>
     </div>
   );

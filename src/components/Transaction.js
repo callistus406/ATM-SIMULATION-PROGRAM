@@ -5,6 +5,10 @@ import { BlurOnTwoTone } from "@material-ui/icons";
 import "./components_css.css";
 import CashTransaction from "./CashTransaction";
 import AccountType from "./AccountType";
+import CustomNavigation from "./CustomNavigation";
+import LandingScreen from "./LandingScreen";
+import Balance from "./Balance";
+import ChangePassword from "./ChangePassword";
 const objectCol1 = [
   {
     id: "1",
@@ -65,20 +69,23 @@ function Transaction() {
 
   function displayTransaction() {
     return (
-      <div className="layoutContainer">
-        <div className="btnLayout" onClick={handleActionBtn}>
-          {objectCol1.map((btn, index) => (
-            <CreateButton text={btn.text} key={btn.id} />
-          ))}
-        </div>
-        <div className="btnLayout" onClick={handleActionBtn}>
-          {objectCol2.map((btn, index) => (
-            <CreateButton
-              text={btn.text}
-              key={btn.id}
-              className={btn.customClass}
-            />
-          ))}
+      <div>
+        <CustomNavigation />{" "}
+        <div className="layoutContainer">
+          <div className="btnLayout" onClick={handleActionBtn}>
+            {objectCol1.map((btn, index) => (
+              <CreateButton text={btn.text} key={btn.id} />
+            ))}
+          </div>
+          <div className="btnLayout" onClick={handleActionBtn}>
+            {objectCol2.map((btn, index) => (
+              <CreateButton
+                text={btn.text}
+                key={btn.id}
+                className={btn.customClass}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -88,6 +95,12 @@ function Transaction() {
       return displayTransaction();
     } else if (state === 1) {
       return <AccountType />;
+    } else if (state === 2) {
+      return <Balance />;
+    } else if (state === 3) {
+      return <ChangePassword />;
+    } else if (state === 6) {
+      return <LandingScreen />;
     }
   }
   return myRender();

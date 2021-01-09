@@ -1,0 +1,24 @@
+.paper{
+    height: 50vh;
+    width: 50vw;
+    /* border: 1px solid blue; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+}
+.spaceOutElements{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+}
+.spaceBtn{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}

@@ -3,6 +3,7 @@ import { CreateButton } from "./CreateButton";
 import "./components_css.css";
 import TransferAccess from "./TransferAccess";
 import BankDetails from "./transferComponents/BankDetails";
+import CustomNavigation from "./CustomNavigation";
 
 const objectCol1 = [
   {
@@ -77,16 +78,19 @@ function Transfer() {
   };
   function displayCashTransaction() {
     return (
-      <div className="layoutContainer">
-        <div className="btnLayout" onClick={handleActionBtn}>
-          {objectCol1.map((btn, index) => (
-            <CreateButton text={btn.text} />
-          ))}
-        </div>
-        <div className="btnLayout" onClick={handleActionBtn}>
-          {objectCol2.map((btn, index) => (
-            <CreateButton text={btn.text} />
-          ))}
+      <div>
+        <CustomNavigation />
+        <div className="layoutContainer">
+          <div className="btnLayout" onClick={handleActionBtn}>
+            {objectCol1.map((btn, index) => (
+              <CreateButton text={btn.text} />
+            ))}
+          </div>
+          <div className="btnLayout" onClick={handleActionBtn}>
+            {objectCol2.map((btn, index) => (
+              <CreateButton text={btn.text} />
+            ))}
+          </div>
         </div>
       </div>
     );
