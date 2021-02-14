@@ -17,6 +17,7 @@ import "./LandingScreen.css";
 import NumberPad from "./NumberPad";
 import Button from "@material-ui/core/Button";
 import Transaction from "./Transaction";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "fit-content",
@@ -33,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function LandingScreen() {
+  const numberPadBtnAction = (e) => {
+    let button = document.getElementsByTagName("button");
+    console.log(e.target.textContent);
+  };
   const initialState = 0;
   let [state, setState] = useState(initialState);
   const handleActionBtn = () => {
@@ -138,7 +143,7 @@ function LandingScreen() {
             </div>
           </div>
           <div className="numberPadSection">
-            <NumberPad />
+            <NumberPad action={numberPadBtnAction} />
           </div>
         </div>
       </div>

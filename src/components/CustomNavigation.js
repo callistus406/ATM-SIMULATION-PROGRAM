@@ -10,6 +10,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import CancelRounded from "@material-ui/icons/CancelRounded";
+
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -17,6 +19,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./Navigation.css";
 import Transaction from "./Transaction";
+import LandingScreen from "./LandingScreen";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -85,10 +88,17 @@ function CustomNavigation(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  let [state, setState] = React.useState(0);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const logOutBtn = () => {
+    setState((state = 1));
+  };
+
+  const cancel = () => {
+    setState((state = 2));
+  };
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -118,7 +128,14 @@ function CustomNavigation(props) {
       onClose={handleMenuClose}
     >
       {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
-      <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+          logOutBtn();
+        }}
+      >
+        Log Out
+      </MenuItem>
     </Menu>
   );
 
@@ -165,25 +182,26 @@ function CustomNavigation(props) {
   // function checkProps() {
   //   props.actionBtn();
   // }
-  return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            {/* <MenuIcon /> */}
-            <div className="arrowBackBtn" onClick={props.actionBtn}>
-              <ArrowBackIcon />
-            </div>
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            CALLY ATM PROGRAM
-          </Typography>
-          {/* <div className={classes.search}>
+  function displayCustomNavigation() {
+    return (
+      <div className={classes.grow}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+            >
+              {/* <MenuIcon /> */}
+              <div className="arrowBackBtn" onClick={cancel}>
+                <CancelRounded />
+              </div>
+            </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              ATM PROGRAM
+            </Typography>
+            {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -196,45 +214,57 @@ function CustomNavigation(props) {
               inputProps={{ "aria-label": "search" }}
             />
           </div> */}
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={42 + 5} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </div>
-  );
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={42 + 5} color="secondary">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </div>
+    );
+  }
+  function renderCustomNavigation() {
+    if (state === 0) {
+      return displayCustomNavigation();
+    } else if (state === 1) {
+      return <LandingScreen />;
+    }
+  }
+  return renderCustomNavigation();
 }
 export default CustomNavigation;

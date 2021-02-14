@@ -35,25 +35,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function ChangePassword() {
+function ChangePassword(props) {
   //   export default function InputAdornments() {(
-
+  const numberPadAction = (e) => {
+    console.log(e.target.textContent);
+  };
   function PasswordInput(props) {
-    const useStyles = makeStyles((theme) => ({
-      root: {
-        display: "flex",
-        flexWrap: "wrap",
-      },
-      margin: {
-        margin: theme.spacing(1),
-      },
-      withoutLabel: {
-        marginTop: theme.spacing(3),
-      },
-      textField: {
-        width: "97%",
-      },
-    }));
+        const useStyles = makeStyles((theme) => ({
+        root: {
+            display: "flex",
+            flexWrap: "wrap",
+        },
+        margin: {
+            margin: theme.spacing(1),
+        },
+        withoutLabel: {
+            marginTop: theme.spacing(3),
+        },
+        textField: {
+            width: "97%",
+        },
+        }));
     const classes = useStyles();
     const [values, setValues] = React.useState({
       amount: "",
@@ -80,7 +82,7 @@ function ChangePassword() {
         <div>
           {" "}
           <FormControl
-            className={clsx(classes.margin, classes.textField)}
+            className={clsx(classes.textField)}
             variant="outlined"
           >
             <InputLabel htmlFor="outlined-adornment-password">
@@ -131,7 +133,7 @@ function ChangePassword() {
         <Divider orientation="vertical" flexItem />
 
         <div className="numberPadContainer">
-          <NumberPad />
+          <NumberPad action={numberPadAction} />
         </div>
       </div>
     </div>

@@ -50,7 +50,11 @@ function AccountType() {
     if (state === 0) {
       return displayButton();
     } else if (state === 1) {
-      return <CashTransaction />;
+      return (
+        // setState(state=0)
+
+        <CashTransaction />
+      );
     }
   }
 

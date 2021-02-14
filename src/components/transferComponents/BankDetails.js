@@ -39,79 +39,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PasswordInput() {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(3),
-    },
-    textField: {
-      width: "80%",
-    },
-  }));
-  const classes = useStyles();
-  const [values, setValues] = useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
-  });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  return (
-    <div>
-      {" "}
-      <FormControl
-        className={clsx(classes.margin, classes.textField)}
-        variant="outlined"
-      >
-        <InputLabel htmlFor="outlined-adornment-password">
-          Confirm Password
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={values.showPassword ? "text" : "password"}
-          value={values.password}
-          autoFocus
-          onChange={handleChange("password")}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          }
-          labelWidth={133}
-        />
-      </FormControl>
-    </div>
-  );
-}
-
 function BankDetails() {
+  // const [valuesBtn, setValuesBtn] = useState({
+  //   accountNumber: "",
+  //   amount: "",
+  // });
+  let accountNumber = "";
+  let amount = "";
+
+  let [acctNo, setAcctNo] = useState(accountNumber);
+  let [amt, setAmount] = useState(amount);
+  let bool = 0;
+
+  const setAction = (e) => {
+    setAcctNo((acctNo += e.target.textContent));
+    // bool = 1;
+    console.log(acctNo);
+  };
+
+  const setAction2 = (e) => {
+    setAmount((amt += e.target.textContent));
+    bool = 1;
+    console.log(amt);
+  };
+
+  const selectAction = (e) => {
+    setAction(e);
+  };
+
+  const selectAction2 = (e) => {
+    setAction2(e);
+  };
+
+  // const check =;
   let initialState = 0;
   let [state, setState] = useState(initialState);
   // const handleActionBtn = (e) => {
@@ -130,21 +90,28 @@ function BankDetails() {
     setState((state = 1));
     // alert(state);
   };
+  const classes = useStyles();
 
-  function InputFields(props) {
-    const classes = useStyles();
-    return (
-      <form
-        className={classes.root}
-        style={{ textAlign: "center" }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="outlined-basic" label={props.label} variant="outlined" />
-      </form>
-    );
-  }
   function displayBankDetails() {
+    function InputFields(props) {
+      console.log(props);
+      return (
+        <form
+          className={classes.root}
+          style={{ textAlign: "center" }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-basic"
+            label={props.label}
+            variant="outlined"
+            value={props.value}
+            // onClick={selectAction}
+          />
+        </form>
+      );
+    }
     return (
       <div>
         <div>
@@ -152,9 +119,27 @@ function BankDetails() {
         </div>
         <div className="bankDetailsParentContainer">
           <div className="bankDetailsContainer">
-            <InputFields label="Account Number" />
+            <InputFields label="Account Number" value={acctNo} />
 
-            <InputFields label="Amount" />
+            {/* <InputFields label="Amount" value={amt} /> */}
+            <form
+              className={classes.root}
+              style={{ textAlign: "center" }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                id="outlined-basic"
+                label="Amount"
+                variant="outlined"
+                value={amt}
+                onClick={(e) => {
+                  // bool = 1;
+                  selectAction2(e);
+                }}
+                // onChange={() => (bool = 1)}
+              />
+            </form>
             <div className="centerBtn">
               <Button
                 variant="contained"
@@ -174,12 +159,15 @@ function BankDetails() {
                   style={{ textAlign: "center" }}
                 >
                   {" "}
-                  Please Confirm Your Password !
+                  <h3>Confirmation Msg</h3>
                 </DialogTitle>
                 <div className="passwordConfirmationContainer">
                   <DialogContent>
-                    <DialogContentText></DialogContentText>
-                    <PasswordInput />
+                    <DialogContentText>
+                      {" "}
+                      Do you Want To Perform This Transaction ?
+                    </DialogContentText>
+                    {/* <PasswordInput /> */}
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -197,7 +185,19 @@ function BankDetails() {
           <Divider orientation="vertical" flexItem />
 
           <div className="bankDetailsNumberPad">
-            <NumberPad />
+            <NumberPad
+              action={(e) => {
+                switch (bool) {
+                  case 0:
+                    return selectAction(e);
+
+                  case 1:
+                    return selectAction2(e);
+                  default:
+                    selectAction2(e);
+                }
+              }}
+            />
           </div>
         </div>
       </div>
