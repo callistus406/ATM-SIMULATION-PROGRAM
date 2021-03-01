@@ -27,6 +27,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // import "./interrupts.css";
+import CashTransaction from "../CashTransaction";
+import PayBills from "../PayBills";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -40,43 +42,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BankDetails() {
-  // const [valuesBtn, setValuesBtn] = useState({
-  //   accountNumber: "",
-  //   amount: "",
-  // });
-  let accountNumber = "";
-  let amount = "";
-
-  let [acctNo, setAcctNo] = useState(accountNumber);
-  let [amt, setAmount] = useState(amount);
-  let bool = 0;
-
-  const setAction = (e) => {
-    setAcctNo((acctNo += e.target.textContent));
-    // bool = 1;
-    console.log(acctNo);
-  };
-
-  const setAction2 = (e) => {
-    setAmount((amt += e.target.textContent));
-    bool = 1;
-    console.log(amt);
-  };
-
-  const selectAction = (e) => {
-    setAction(e);
-  };
-
-  const selectAction2 = (e) => {
-    setAction2(e);
-  };
-
-  // const check =;
   let initialState = 0;
   let [state, setState] = useState(initialState);
-  // const handleActionBtn = (e) => {
-  //   setState((state = 1));
-  // };
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -86,28 +54,64 @@ function BankDetails() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleLoadingScreen = () => {
+  const handleLoadingScreen = (e) => {
     setState((state = 1));
-    // alert(state);
+  };
+
+  const handleActionBtn = (e) => {
+    if (e.target.textContent === "TRANSFER") {
+      setState((state = 1));
+    } else if (e.target.textContent === "CANCEL") {
+      setState((state = 2));
+    }
   };
   const classes = useStyles();
 
   function displayBankDetails() {
     function InputFields(props) {
-      console.log(props);
+      const [acct, setAcct] = useState({
+        account: "",
+      });
+      const [amt, setAmt] = useState({
+        amount: "",
+      });
+
+      const handleChange2 = (event) => {
+        setAmt({ ...amt, amount: event.target.value });
+      };
+      const handleChange = (event) => {
+        setAcct({ ...acct, account: event.target.value });
+      };
       return (
         <form
           className={classes.root}
-          style={{ textAlign: "center" }}
+          style={{
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "space-around",
+            flexDirection: "column",
+            height: "42vh",
+            alignItems: "center",
+          }}
           noValidate
           autoComplete="off"
         >
           <TextField
             id="outlined-basic"
-            label={props.label}
+            label="Account Number"
             variant="outlined"
-            value={props.value}
-            // onClick={selectAction}
+            type="number"
+            value={acct.account}
+            onChange={handleChange}
+          />
+
+          <TextField
+            id="outlined-basic"
+            label="Amount"
+            type="number"
+            variant="outlined"
+            value={amt.amount}
+            onChange={handleChange2}
           />
         </form>
       );
@@ -119,34 +123,25 @@ function BankDetails() {
         </div>
         <div className="bankDetailsParentContainer">
           <div className="bankDetailsContainer">
-            <InputFields label="Account Number" value={acctNo} />
+            <h3>Fill Up The Fields</h3>
+            <InputFields />
 
-            {/* <InputFields label="Amount" value={amt} /> */}
-            <form
-              className={classes.root}
-              style={{ textAlign: "center" }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                id="outlined-basic"
-                label="Amount"
-                variant="outlined"
-                value={amt}
-                onClick={(e) => {
-                  // bool = 1;
-                  selectAction2(e);
-                }}
-                // onChange={() => (bool = 1)}
-              />
-            </form>
             <div className="centerBtn">
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleClickOpen}
+                onClick={handleActionBtn}
+                style={{ height: "8vh" }}
               >
-                Transfer
+                CANCEL
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleClickOpen}
+                style={{ height: "8vh" }}
+              >
+                TRANSFER
               </Button>
               {/* start of the dialog box */}
               <Dialog
@@ -184,21 +179,13 @@ function BankDetails() {
           </div>
           <Divider orientation="vertical" flexItem />
 
-          <div className="bankDetailsNumberPad">
+          {/* <div className="bankDetailsNumberPad">
             <NumberPad
               action={(e) => {
-                switch (bool) {
-                  case 0:
-                    return selectAction(e);
-
-                  case 1:
-                    return selectAction2(e);
-                  default:
-                    selectAction2(e);
-                }
+                return selectAction(e);
               }}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     );
@@ -208,6 +195,8 @@ function BankDetails() {
       return displayBankDetails();
     } else if (state === 1) {
       return <LoadingScreen />;
+    } else if (state === 2) {
+      return <PayBills />;
     }
   }
   return renderBankDetails();

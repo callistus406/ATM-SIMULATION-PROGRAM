@@ -4,6 +4,7 @@ import "./components_css.css";
 import TransferAccess from "./TransferAccess";
 import BankDetails from "./transferComponents/BankDetails";
 import CustomNavigation from "./CustomNavigation";
+import CashTransaction from "./CashTransaction";
 
 const objectCol1 = [
   {
@@ -68,12 +69,11 @@ function Transfer() {
       "SKYE BANK",
       "UBA",
       "STERLING BANK",
-      "EXIT",
     ];
     if (banks.includes(e.target.textContent)) {
       setState((state = 1));
-    } else {
-      setState((state = 0));
+    } else if (e.target.textContent === "EXIT") {
+      setState((state = 2));
     }
   };
   function displayCashTransaction() {
@@ -101,6 +101,8 @@ function Transfer() {
       return displayCashTransaction();
     } else if (state === 1) {
       return <BankDetails />;
+    } else if (state === 2) {
+      return <CashTransaction />;
     }
   }
   return renderCashTransaction();

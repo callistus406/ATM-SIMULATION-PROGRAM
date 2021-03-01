@@ -43,7 +43,7 @@ function LandingScreen() {
   const handleActionBtn = () => {
     setState((state = 1));
   };
-  function PasswordInput(props) {
+  function LoginInput(props) {
     const useStyles = makeStyles((theme) => ({
       root: {
         display: "flex",
@@ -59,12 +59,12 @@ function LandingScreen() {
         width: "100%",
       },
     }));
-    const classes = useStyles();
     const [values, setValues] = useState({
-      amount: "",
+      cardNumber: "",
+      cvvNumber: "",
       password: "",
-      weight: "",
-      weightRange: "",
+      showCardNumber: false,
+      showCvvNumber: false,
       showPassword: false,
     });
 
@@ -72,44 +72,119 @@ function LandingScreen() {
       setValues({ ...values, [prop]: event.target.value });
     };
 
-    const handleClickShowPassword = () => {
-      setValues({ ...values, showPassword: !values.showPassword });
+    // correct
+    const handleClickShowPassword = (prop) => (event) => {
+      let propStore;
+      if (prop === "showCvvNumber") {
+        propStore = values.showCvvNumber;
+      } else if (prop === "showCardNumber") {
+        propStore = values.showCardNumber;
+      } else if (prop === "showPassword") {
+        propStore = values.showPassword;
+      }
+      setValues({ ...values, [prop]: !propStore });
+      console.log(propStore);
     };
 
     const handleMouseDownPassword = (event) => {
       event.preventDefault();
     };
 
+    const classes = useStyles();
+
     return (
       <div>
-        {" "}
-        <FormControl
-          className={clsx(classes.margin, classes.textField)}
-          variant="outlined"
-        >
-          <InputLabel htmlFor="outlined-adornment-password">
-            {props.label}
-          </InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showPassword ? "text" : "password"}
-            value={values.password}
-            onChange={handleChange("password")}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={125}
-          />
-        </FormControl>
+        <div className="spacer">
+          {" "}
+          <div>
+            <FormControl className={clsx(classes.textField)} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Card Number
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={values.showCardNumber ? "text" : "password"}
+                value={values.cardNumber}
+                onChange={handleChange("cardNumber")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword("showCardNumber")}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showCardNumber ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={100}
+              />
+            </FormControl>
+          </div>
+          <div>
+            <FormControl className={clsx(classes.textField)} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Cvv Number
+              </InputLabel>
+
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={values.showCvvNumber ? "text" : "password"}
+                value={values.cvvNumber}
+                onChange={handleChange("cvvNumber")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword("showCvvNumber")}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showCvvNumber ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={95}
+              />
+            </FormControl>
+          </div>
+          {/* retype password */}
+          <div>
+            <FormControl className={clsx(classes.textField)} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password{" "}
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={values.showPassword ? "number" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword("showPassword")}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={75}
+              />
+            </FormControl>
+          </div>
+        </div>
       </div>
     );
   }
@@ -117,33 +192,37 @@ function LandingScreen() {
     return (
       <div className="landingScreenContainer">
         <div class="header-msg">
-          <h1>WELCOME TO MY ATM SIMULATION PROGRAM</h1>
-          <p>
+          <h3 style={{ fontSize: "1.5rem" }}>
+            WELCOME TO MY ATM SIMULATION PROGRAM
+          </h3>
+          <p className="write-up">
             install our mobile App on playStore(For Android) and apple Store(
             For IOS)
           </p>
-          <p>Dail *894# to Enjoy My new Mobile banking System.</p>
+          <p className="write-up">
+            Dail *894# to Enjoy My new Mobile banking System.
+          </p>
         </div>
         <div className="editSection">
           <div className="inputSection">
             <div className="inputs">
-              <PasswordInput label="Card Number" />
-              <PasswordInput label="Cvv Number" />
-              <PasswordInput label="Password" />
+              <LoginInput />
               {/* <div className="center"> */}
               <Button
                 variant="contained"
                 color="primary"
-                style={{ marginLeft: "auto", marginRight: "auto" }}
+                style={{
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  height: "3rem",
+                  marginTop: "2.5vh",
+                }}
                 onClick={handleActionBtn}
               >
                 Login
               </Button>
               {/* </div> */}
             </div>
-          </div>
-          <div className="numberPadSection">
-            <NumberPad action={numberPadBtnAction} />
           </div>
         </div>
       </div>

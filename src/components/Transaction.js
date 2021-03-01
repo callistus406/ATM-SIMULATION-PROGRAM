@@ -9,6 +9,7 @@ import CustomNavigation from "./CustomNavigation";
 import LandingScreen from "./LandingScreen";
 import Balance from "./Balance";
 import ChangePassword from "./ChangePassword";
+import Error404 from "./Error404";
 const objectCol1 = [
   {
     id: "1",
@@ -101,6 +102,10 @@ function Transaction() {
       return <ChangePassword />;
     } else if (state === 6) {
       return <LandingScreen />;
+    } else if (state === 4) {
+      return <Error404 />;
+    } else if (state === 5) {
+      return <Error404 />;
     }
   }
   return myRender();

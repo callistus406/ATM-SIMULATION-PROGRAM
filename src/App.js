@@ -18,6 +18,8 @@ import LoadingScreen from "./components/Interrupts/LoadingScreen";
 import PasswordConfirmation from "./components/Interrupts/PasswordConfirmation";
 import ConfirmationMsg from "./ConfirmationMsg";
 import LandingScreen from "./components/LandingScreen";
+import Amounts from "./components/Amounts";
+import SelectAmount from "./components/SelectAmount";
 
 export function App() {
   return (
@@ -25,10 +27,12 @@ export function App() {
       {/* <Creat eButton text="transfer" customClass="transferBtn" /> */}
       {/* <CreateButton /> */}
       {/* <Transaction /> */}
+      {/* <Error404 /> */}
       {/* <ConfirmationMsg /> */}
       {/* <ChangePassword /> */}
       {/* <CashTransaction /> */}
       {/* <Deposite /> */}
+      {/* <SelectAmount /> */}
       {/* <Transfer /> */}
       {/* <Withdrawal /> */}
       {/* <PayBills /> */}

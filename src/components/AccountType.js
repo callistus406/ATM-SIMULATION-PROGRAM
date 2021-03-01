@@ -40,7 +40,7 @@ function AccountType() {
         <CustomNavigation /> <div style={{ marginBottom: "10vh" }}></div>
         <div className="btnLayoutSingle" onClick={handleActionBtn}>
           {objectCol1.map((btn, index) => (
-            <CreateButton text={btn.text} />
+            <CreateButton text={btn.text} key={btn.id} />
           ))}
         </div>
       </div>

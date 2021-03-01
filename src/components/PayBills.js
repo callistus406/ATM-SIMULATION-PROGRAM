@@ -1,6 +1,9 @@
-import React from "react";
+import { React, useState } from "react";
 import { CreateButton } from "./CreateButton";
 import "./components_css.css";
+import BankDetails from "./transferComponents/BankDetails";
+import CashTransaction from "./CashTransaction";
+import CustomNavigation from "./CustomNavigation";
 
 const objectCol1 = [
   {
@@ -24,37 +27,88 @@ const objectCol1 = [
 const objectCol2 = [
   {
     id: "4",
-    customClass: "waterbillBtn",
-    text: "WATER",
+    customClass: "maintenanceBtn",
+    text: "ATM MAINTENANCE",
   },
   {
     id: "5",
 
-    customClass: "maintainanceBtn",
-    text: "ATM MAINTAINANCE",
+    customClass: "othersBtn",
+    text: "OTHERS",
   },
   {
     id: "6",
 
-    customClass: "othersBtn",
-    text: "OTHERS",
+    customClass: "cancelbtn",
+    text: "CANCEL",
   },
 ];
+
 function PayBills() {
-  return (
-    <div className="layoutContainer">
-      <div className="btnLayout">
-        {objectCol1.map((btn, index) => (
-          <CreateButton text={btn.text} className={btn.customClass} />
-        ))}
-      </div>
-      <div className="btnLayout">
-        {objectCol2.map((btn, index) => (
-          <CreateButton text={btn.text} />
-        ))}
-      </div>
-    </div>
-  );
+  const initialState = 0;
+  let [state, setState] = useState(initialState);
+
+  const handleActionBtn = (e) => {
+    // console.log("state");'
+    // console.log(e.target.textContent);
+
+    if (e.target.textContent === "LIGHT") {
+      setState((state = 1));
+    } else if (e.target.textContent === "TAX") {
+      setState((state = 2));
+    } else if (e.target.textContent === "SCHOOL FEE") {
+      setState((state = 3));
+    } else if (e.target.textContent === "ATM  MAINTENANCE ") {
+      setState((state = 4));
+    } else if (e.target.textContent === " OTHERS") {
+      setState((state = 5));
+    } else if (e.target.textContent === "CANCEL") {
+      setState((state = 6));
+    }
+  };
+
+  function displayPayBills() {
+    return (
+      <>
+        <CustomNavigation />
+        <div className="layoutContainer">
+          <div className="btnLayout" onClick={handleActionBtn}>
+            {objectCol1.map((btn, index) => (
+              <CreateButton
+                text={btn.text}
+                className={btn.customClass}
+                key={btn.id}
+              />
+            ))}
+          </div>
+          <div className="btnLayout" onClick={handleActionBtn}>
+            {objectCol2.map((btn, index) => (
+              <CreateButton text={btn.text} key={btn.id} />
+            ))}
+          </div>
+        </div>
+      </>
+    );
+  }
+  function myRender() {
+    if (state === 0) {
+      return displayPayBills();
+    } else if (state === 1) {
+      // return <BankDetails />;
+    } else if (state === 2) {
+      // return <BankDetails />;
+    } else if (state === 3) {
+      return <BankDetails />;
+    } else if (state === 4) {
+      // return <BankDetails />;
+    } else if (state === 5) {
+      // return <BankDetails />;
+    } else if (state === 6) {
+      return <CashTransaction />;
+    }
+  }
+
+  return myRender();
 }
 
 export default PayBills;

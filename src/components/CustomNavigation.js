@@ -262,7 +262,8 @@ function CustomNavigation(props) {
     if (state === 0) {
       return displayCustomNavigation();
     } else if (state === 1) {
-      return <LandingScreen />;
+      window.location.reload();
+      // return <LandingScreen />;
     }
   }
   return renderCustomNavigation();
