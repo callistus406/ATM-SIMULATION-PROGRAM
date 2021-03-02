@@ -4,6 +4,7 @@ import "./components_css.css";
 import BankDetails from "./transferComponents/BankDetails";
 import CashTransaction from "./CashTransaction";
 import CustomNavigation from "./CustomNavigation";
+import Betting from "./transferComponents/Betting";
 
 const objectCol1 = [
   {
@@ -27,8 +28,8 @@ const objectCol1 = [
 const objectCol2 = [
   {
     id: "4",
-    customClass: "maintenanceBtn",
-    text: "ATM MAINTENANCE",
+    customClass: "bettingBtn",
+    text: "BETTING",
   },
   {
     id: "5",
@@ -58,12 +59,16 @@ function PayBills() {
       setState((state = 2));
     } else if (e.target.textContent === "SCHOOL FEE") {
       setState((state = 3));
-    } else if (e.target.textContent === "ATM  MAINTENANCE ") {
+    } else if (e.target.textContent === "BETTING") {
       setState((state = 4));
     } else if (e.target.textContent === " OTHERS") {
       setState((state = 5));
     } else if (e.target.textContent === "CANCEL") {
       setState((state = 6));
+    } else if (e.target.textContent === "BETTING ") {
+      setState((state = 7));
+    } else if (e.target.textContent === "SUBSCRIPTION ") {
+      setState((state = 8));
     }
   };
 
@@ -100,9 +105,13 @@ function PayBills() {
     } else if (state === 3) {
       return <BankDetails />;
     } else if (state === 4) {
-      // return <BankDetails />;
+      return <Betting />;
     } else if (state === 5) {
       // return <BankDetails />;
+    } else if (state === 6) {
+      return <CashTransaction />;
+    } else if (state === 7) {
+      // return <Betting />;
     } else if (state === 6) {
       return <CashTransaction />;
     }

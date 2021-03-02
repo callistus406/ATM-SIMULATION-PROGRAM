@@ -20,7 +20,8 @@ import ConfirmationMsg from "./ConfirmationMsg";
 import LandingScreen from "./components/LandingScreen";
 import Amounts from "./components/Amounts";
 import SelectAmount from "./components/SelectAmount";
-
+import BettingAmount from "./components/transferComponents/BettingAmount";
+import Betting from "./components/transferComponents/Betting";
 export function App() {
   return (
     <div>
@@ -44,7 +45,9 @@ export function App() {
       {/* <LoadingScreen /> */}
       {/* <PasswordConfirmation /> */}
       {/* <Navigation /> */}
-      <LandingScreen />
+      {/* <LandingScreen /> */}
+      {/* <BettingAmount /> */}
+      <Betting />
     </div>
   );
 }
