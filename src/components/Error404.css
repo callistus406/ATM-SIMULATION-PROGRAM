@@ -1,0 +1,35 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.parentContainer{
+    /* position: relative; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 75vh;
+    transform: translateX(-50%) translateY(-50%);
+}
+.container {
+    margin: auto;
+    width: 75vw;
+    height: 50vh;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   
+    background: rgb(255, 41, 41);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+.button{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7vh;
+}
